@@ -69,13 +69,20 @@ class OnboardScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 60,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SignInScreen(),
+                      ),
+                    );
+                  },
                   style: FilledButton.styleFrom(
                     backgroundColor: Colors.white,
                     side: BorderSide(color: Colors.black, width: 2),
                   ),
                   child: Text(
-                    "Create an account",
+                    "Login",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
