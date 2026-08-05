@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_fruits_final/Home/HomeScreen.dart';
 
 import 'CustomTextField.dart';
 
@@ -10,6 +11,19 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  String email = "";
+  String password = "";
+
+  final TextEditingController
+  emailController = TextEditingController(),
+  passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 440),
+            padding: EdgeInsets.only(top: 420),
             child: Container(
               width: double.infinity,
               height: double.infinity,
@@ -55,20 +69,53 @@ class _SignInScreenState extends State<SignInScreen> {
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              emailController.clear();
+                              passwordController.clear();
+                            },
                             icon: Icon(Icons.close_rounded),
                             color: Colors.white,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 18,),
+                    SizedBox(height: 18),
 
-                    CustomTextField(hintText: "hala@gmail.com"),
-                    SizedBox(height: 13,),
-                    CustomTextField(hintText: "password", suffixIcon: Icon(Icons.remove_red_eye_rounded),),
+                    CustomTextField(
+                      controller: emailController,
+                      hintText: "hala@gmail.com",
+                      onValueChanged: (value) {
+                        setState(() {
+                          email = value;
+                          print(email);
+                        });
+                      },
+                    ),
+                    SizedBox(height: 13),
+                    CustomTextField(
+                      controller: passwordController,
+                      hintText: "password",
+                      onValueChanged: (value) {
+                        setState(() {
+                          password = value;
+                          print(password);
+                        });
+                      },
+                      suffixIcon: Icon(Icons.remove_red_eye_rounded),
+                    ),
                     SizedBox(height: 20),
-                    TextButton(onPressed: (){},child: Text("Forget Password?",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400, color: Color(0xffFEC54B)),textAlign: TextAlign.center),),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Forget Password?",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xffFEC54B),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(top: 40, left: 28, right: 28),
                       child: SizedBox(
@@ -76,12 +123,31 @@ class _SignInScreenState extends State<SignInScreen> {
                         height: 60,
                         child: FilledButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (_) => const (number: 2),
-                            //   ),
-                            // );
+                            if(email != "" && password != "") {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: const Text('Congratulation!!!!'),
+                                  duration: const Duration(seconds: 2),
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => HomeScreen()
+                                ),
+                              );
+                            }
+                            else{
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: const Text('Check if complete all Information!'),
+                                  duration: const Duration(seconds: 2),
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+
+                            }
                           },
                           style: FilledButton.styleFrom(
                             backgroundColor: Color(0xffFEC54B),
@@ -107,3 +173,4 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 }
+
