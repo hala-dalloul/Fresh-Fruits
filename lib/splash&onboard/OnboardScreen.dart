@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_fruits_final/SignIn&Up/SignInScreen.dart';
+
+import 'package:fresh_fruits_final/SignIn&Up/SignUpScreen.dart';
 
 
 class OnboardScreen extends StatelessWidget {
@@ -44,7 +47,14 @@ class OnboardScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 60,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SignUpScreen(),
+                      ),
+                    );
+                  },
                   style: FilledButton.styleFrom(backgroundColor: Colors.black),
                   child: Text(
                     "Create an account",
