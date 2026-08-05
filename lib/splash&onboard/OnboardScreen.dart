@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_fruits_final/SignIn&Up/SignInScreen.dart';
+
+import 'package:fresh_fruits_final/SignIn&Up/SignUpScreen.dart';
 
 
 class OnboardScreen extends StatelessWidget {
@@ -44,7 +47,14 @@ class OnboardScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 60,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SignUpScreen(),
+                      ),
+                    );
+                  },
                   style: FilledButton.styleFrom(backgroundColor: Colors.black),
                   child: Text(
                     "Create an account",
@@ -59,13 +69,20 @@ class OnboardScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 60,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SignInScreen(),
+                      ),
+                    );
+                  },
                   style: FilledButton.styleFrom(
                     backgroundColor: Colors.white,
                     side: BorderSide(color: Colors.black, width: 2),
                   ),
                   child: Text(
-                    "Create an account",
+                    "Login",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
